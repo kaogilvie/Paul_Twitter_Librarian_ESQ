@@ -20,10 +20,12 @@ OAUTH_TOKEN = auth['oauth_token']
 OAUTH_TOKEN_SECRET = auth['oauth_token_secret']
 #should store these in a session variable in Django when you migrate to web
 
+#need these creds to get the USER_variables -- currently missing that step.
+
 #(should redirect here??) 
 verify_creds = auth['auth_url']
 
-auth = OAuth1(PTLE['APP_KEY'], PTLE['APP_SECRET'], OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+auth = OAuth1(PTLE['APP_KEY'], PTLE['APP_SECRET'], PTLE['USER_OAUTH_TOKEN'], PTLE['USER_OAUTH_TOKEN_SECRET'])
 
 r = requests.get(get_request, auth=auth)
 print r.json()
