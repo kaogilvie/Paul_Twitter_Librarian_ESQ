@@ -2,7 +2,14 @@ import requests
 from requests_oauthlib import OAuth1
 from twython import Twython
 from fortknox import PTLE
+import csv
 
+archive_file = 'archive.csv'
+
+#temporary CSV archive
+file = open(archive_file, 'r+')
+tweet_reader = csv.DictReader(file)
+print tweet_reader
 
 #v0.1 -- twitter to user
 #make call to twitter REST API
@@ -20,24 +27,36 @@ OAUTH_TOKEN = auth['oauth_token']
 OAUTH_TOKEN_SECRET = auth['oauth_token_secret']
 #should store these in a session variable in Django when you migrate to web
 
-#need these creds to get the USER_variables -- currently missing that step.
-
 #(should redirect here??) 
 verify_creds = auth['auth_url']
+#this is where the user_creds come from--when the user grants permission then you make
+#a call to grab the USER_OAUTH_TOKENs; need to make another twython instance
+#for now, we can hard code them to get the ball rolling.
 
 auth = OAuth1(PTLE['APP_KEY'], PTLE['APP_SECRET'], PTLE['USER_OAUTH_TOKEN'], PTLE['USER_OAUTH_TOKEN_SECRET'])
 
 r = requests.get(get_request, auth=auth)
-print r.json()
+response = r.json()
 
-#return URLs and parse them into a list of sorts
+#return URLs and parse them into a dictionary
+
+response_dict = {}
 
 for i in response:
-	for k in i['urls']:
+	grab_url = False
+	date = i['created_at']
+	for k in i['entities']['urls']:
 		grab_url = k['expanded_url']
-		print grab_url
+	if grab_url is not False:
+		response_dict[date] = grab_url
+keys = response_dict.keys()
 
-#write out a CSV // something that will get updated (append the CSV?)
+#this is problematic with the way it writes to a csv
+#only writes in a horizontal row, with the links only. want dates and links
+tweet_writer = csv.DictWriter(file, keys)
+tweet_writer.writerow(response_dict)
+
+#need something that will persist, will check for membership.
 
 #v0.2
 #give the user the ability to annotate each entry
