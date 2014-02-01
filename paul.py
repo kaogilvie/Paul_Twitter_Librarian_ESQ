@@ -1,20 +1,26 @@
 import requests
 from requests_oauthlib import OAuth1
 from twython import Twython
-from fortknox import PTLE
+from secret_credentials_hiding_place import PTLE
 import csv
 
-archive_file = 'archive.csv'
 
-#temporary CSV archive
-file = open(archive_file, 'r+b')
-tweet_reader = csv.DictReader(file)
-print tweet_reader
+#prompt for username
+username = raw_input('Username: ')
+archive_file = username+'.csv'
+response_dict = {}
+
+try:
+	file = open(archive_file, 'r+b')
+	tweet_reader = csv.DictReader(file)
+	response_dict = tweet_reader.next()
+except IOError:
+	print 'No archive file. New tweet timeline will be created.'
+	pass
 
 #v0.1 -- twitter to user
 #make call to twitter REST API
 
-username = 'thecliffsodover'
 get_request = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+username+"&count=10"
 #callback = 
 
@@ -38,10 +44,6 @@ auth = OAuth1(PTLE['APP_KEY'], PTLE['APP_SECRET'], PTLE['USER_OAUTH_TOKEN'], PTL
 r = requests.get(get_request, auth=auth)
 response = r.json()
 
-#return URLs and parse them into a dictionary
-
-response_dict = {}
-
 for i in response:
 	grab_url = False
 	date = i['created_at']
@@ -50,15 +52,10 @@ for i in response:
 	if grab_url is not False:
 		response_dict[date] = grab_url
 keys = response_dict.keys()
-print keys
 
-#this is problematic with the way it writes to a csv
-#only writes in a horizontal row, with the links only. want dates and links
-tweet_writer = csv.DictWriter(file, keys)
+tweet_writer = csv.DictWriter(open(archive_file, 'wb'), keys)
 tweet_writer.writeheader()
 tweet_writer.writerow(response_dict)
-
-#need something that will persist, will check for membership.
 
 #v0.2
 #give the user the ability to annotate each entry
