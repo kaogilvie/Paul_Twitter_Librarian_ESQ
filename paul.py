@@ -1,8 +1,12 @@
 import requests
 from requests_oauthlib import OAuth1
 from twython import Twython
-from secret_credentials_hiding_place import PTLE
+from fortknox import PTLE
 import csv
+
+#via ftknox
+app_key = PTLE['APP_KEY']
+app_secret = PTLE['APP_SECRET']
 
 
 #prompt for username
@@ -18,31 +22,14 @@ except IOError:
 	print 'No archive file. New tweet timeline will be created.'
 	pass
 
-#v0.1 -- twitter to user
-#make call to twitter REST API
+#v0.1 -- twitter to user vai OAuth2
+twitter = Twython(app_key, app_secret, oauth_version=2)
+ACCESS_TOKEN = twitter.obtain_access_token()
+twitter = Twython(app_key, access_token=ACCESS_TOKEN)
 
-get_request = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name="+username+"&count=10"
-#callback = 
+response = twitter.get_user_timeline(screen_name=username, count=1)
 
-twitter = Twython(PTLE['APP_KEY'], PTLE['APP_SECRET'])
-auth = twitter.get_authentication_tokens()
-#need callback URL for web application
-#auth = twitter.get_authentication_token(callback_url=callback)
-
-OAUTH_TOKEN = auth['oauth_token']
-OAUTH_TOKEN_SECRET = auth['oauth_token_secret']
-#should store these in a session variable in Django when you migrate to web
-
-#(should redirect here??) 
-verify_creds = auth['auth_url']
-#this is where the user_creds come from--when the user grants permission then you make
-#a call to grab the USER_OAUTH_TOKENs; need to make another twython instance
-#for now, we can hard code them to get the ball rolling.
-
-auth = OAuth1(PTLE['APP_KEY'], PTLE['APP_SECRET'], PTLE['USER_OAUTH_TOKEN'], PTLE['USER_OAUTH_TOKEN_SECRET'])
-
-r = requests.get(get_request, auth=auth)
-response = r.json()
+print response
 
 for i in response:
 	grab_url = False
