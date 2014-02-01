@@ -7,7 +7,7 @@ import csv
 archive_file = 'archive.csv'
 
 #temporary CSV archive
-file = open(archive_file, 'r+')
+file = open(archive_file, 'r+b')
 tweet_reader = csv.DictReader(file)
 print tweet_reader
 
@@ -50,10 +50,12 @@ for i in response:
 	if grab_url is not False:
 		response_dict[date] = grab_url
 keys = response_dict.keys()
+print keys
 
 #this is problematic with the way it writes to a csv
 #only writes in a horizontal row, with the links only. want dates and links
 tweet_writer = csv.DictWriter(file, keys)
+tweet_writer.writeheader()
 tweet_writer.writerow(response_dict)
 
 #need something that will persist, will check for membership.
