@@ -22,14 +22,12 @@ except IOError:
 	print 'No archive file. New tweet timeline will be created.'
 	pass
 
-#v0.1 -- twitter to user vai OAuth2
+#v0.1 -- twitter to user vai OAuth2 -- put onto Django.
 twitter = Twython(app_key, app_secret, oauth_version=2)
 ACCESS_TOKEN = twitter.obtain_access_token()
 twitter = Twython(app_key, access_token=ACCESS_TOKEN)
 
 response = twitter.get_user_timeline(screen_name=username, count=1)
-
-print response
 
 for i in response:
 	grab_url = False
