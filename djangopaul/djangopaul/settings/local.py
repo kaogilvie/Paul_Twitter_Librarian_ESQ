@@ -19,21 +19,21 @@ TEMPLATE_DEBUG = DEBUG
 
 # Application definition
 
-INSTALLED_APPS += ('debug_toolbar', )
+INSTALLED_APPS += ()
 
-MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
+MIDDLEWARE_CLASSES += ( )
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': ''
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'paul', #this is incorrect
+        'USER': 'postgres',
+        'PASSWORD': get_environ_variable("PAUL_POSTGRES"),
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 

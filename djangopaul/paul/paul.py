@@ -1,5 +1,3 @@
-import requests
-from requests_oauthlib import OAuth1
 from twython import Twython
 from fortknox import PTLE
 import csv
