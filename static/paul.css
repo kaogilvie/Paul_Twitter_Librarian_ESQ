@@ -1,0 +1,32 @@
+#title{
+	padding-left: 2rem;
+	padding-bottom: 1rem;
+	font-size: 3.5rem;
+	font-family: 'Marcellus SC', 'Verdana', 'serif';
+	margin-left: 5rem;
+}
+form{
+	background-color: pink;
+	border: 5px solid black;
+	padding: 2rem;
+	margin-right: 50%;
+	margin-left: 10%;
+}
+#username{
+	margin-left: 25%;
+}
+#submit{
+	margin-top: 1rem;
+	margin-left: 40%;
+}
+footer{
+	font-size: .7rem;
+	padding-top: 2rem;
+	margin-left: 15%;
+}
+a{
+	padding-left: 5%;
+}
+#github, #ko{
+	margin-left: 7%;
+}

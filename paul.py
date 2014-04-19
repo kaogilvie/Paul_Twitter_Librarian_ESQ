@@ -41,16 +41,27 @@ tweet_writer.writeheader()
 tweet_writer.writerow(response_dict)
 
 #v0.2
-#give the user the ability to annotate each entry
+#hoist onto the web using FLASK (?) -- return json response and print out
+#need to set environment variables on the linux server
 
 #v0.3
-#give the user the ability to tag things using hashtags
+#parse json response into something readable
+#give option to download CSV
 
 #v0.4
-#connect to tumblr
+#give user ability to authenticate to Twitter if tweets are private
+
+#v0.5
+#give the user the ability to annotate each entry
+
+#v0.6
+#give the user the ability to tag things using hashtags
 
 #v2.0
-#wordpress widget
+#connect to tumblr
 
 #v3.0
+#wordpress widget
+
+#v4.0
 #website plugin
