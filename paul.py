@@ -3,9 +3,6 @@ from fortknox import PTLE
 import csv
 
 def get_timeline(app_key, app_secret, username):
-	#prompt for username
-	#username = raw_input('Username: ')
-	#archive_file = username+'.csv'
 	response_dict = {}
 
 	#try:
@@ -15,14 +12,12 @@ def get_timeline(app_key, app_secret, username):
 	#except IOError:
 	#	print 'No archive file. New tweet timeline will be created.'
 
-	#v0.1 -- twitter to user vai OAuth2 -- put onto Django.
+	#v0.1 -- twitter to user vai OAuth2
 	twitter = Twython(app_key, app_secret, oauth_version=2)
 	ACCESS_TOKEN = twitter.obtain_access_token()
 	twitter = Twython(app_key, access_token=ACCESS_TOKEN)
 
-	response = twitter.get_user_timeline(screen_name=username, count=1)
-
-	print response
+	response = twitter.get_user_timeline(screen_name=username, count=100)
 
 	for i in response:
 		grab_url = False
@@ -33,21 +28,19 @@ def get_timeline(app_key, app_secret, username):
 			response_dict[date] = grab_url
 	keys = response_dict.keys()
 
-	print keys
-
 	#tweet_writer = csv.DictWriter(open(archive_file, 'wb'), keys)
 	#tweet_writer.writeheader()
 	#tweet_writer.writerow(response_dict)
 
-	return response
+	#v0.2
+	#hoist onto the web using FLASK -- return json response and print out
+	return response_dict
 
-#v0.2
-#hoist onto the web using FLASK (?) -- return json response and print out
-#need to set environment variables on the linux server
 
 #v0.3
 #parse json response into something readable
 #give option to download CSV
+#need to set environment variables on the linux server
 
 #v0.4
 #give user ability to authenticate to Twitter if tweets are private
