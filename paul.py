@@ -2,6 +2,11 @@ from twython import Twython
 from fortknox import PTLE
 import csv
 
+#debug
+#username = 'thecliffsodover'
+#app_secret = PTLE['APP_SECRET']
+#app_key = PTLE['APP_KEY']
+
 def get_timeline(app_key, app_secret, username):
 	response_dict = {}
 
@@ -20,13 +25,26 @@ def get_timeline(app_key, app_secret, username):
 	response = twitter.get_user_timeline(screen_name=username, count=100)
 
 	for i in response:
+		#get date
 		grab_url = False
 		date = i['created_at']
 		for k in i['entities']['urls']:
 			grab_url = k['expanded_url']
 		if grab_url is not False:
-			response_dict[date] = grab_url
+			response_dict[date]['url'] = grab_url
+		
+		#get hashtags -- check if not null
+		hashtags = i['hashtags']
+		response_dict[date]['hashtags'] = hashtags
+
+		#get text of tweet -- check if not null
+		text = i['text']
+		response_dict[date]['text'] = text
+
+		#can put these all together in a function, I think
+
 	keys = response_dict.keys()
+
 
 	#tweet_writer = csv.DictWriter(open(archive_file, 'wb'), keys)
 	#tweet_writer.writeheader()
@@ -34,8 +52,10 @@ def get_timeline(app_key, app_secret, username):
 
 	#v0.2
 	#hoist onto the web using FLASK -- return json response and print out
-	return response_dict
+	return response_dict, keys
 
+#debug
+#get_timeline(app_key, app_secret, username)
 
 #v0.3
 #parse json response into something readable

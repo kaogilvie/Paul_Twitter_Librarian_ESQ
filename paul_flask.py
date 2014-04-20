@@ -16,8 +16,8 @@ def paul_home():
 def annals():
 	if request.method == 'POST':
 		username = request.form['username']
-		response = paul.get_timeline(app_key, app_secret, username)
-		return render_template('annals.html', response=response)
+		response, keys = paul.get_timeline(app_key, app_secret, username)
+		return render_template('annals.html', response_dict=response, response_keys=keys)
 	else:
 		return 'get request'
 

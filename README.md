@@ -52,7 +52,7 @@ You expected better of Paul. Your eyes show it.
 
 ***
 
-Carrying a box of eggs home from the corner story, you see there's a light on in the library. On a whim, you turn into the parkinglot and notice that there's a small piece of paper tacked to the outside of the grand double doors.
+Carrying a box of eggs home from the corner store, you see there's a light on in the library. On a whim, you turn into the parkinglot and notice that there's a small piece of paper tacked to the outside of the grand double doors.
 
 "Welcome to the Annals!!!!!" it proclaims, abusing its exclamation point privileges like it was in high school. The door creaks open and light pools on the blacktop. Peeking inside, you find Paul sprawled out on the floor, flasks of alcohol uncorked and half finished. There's gibberish scrawled in black ink all over the floor and stacks.
 

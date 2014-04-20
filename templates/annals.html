@@ -5,6 +5,10 @@
 		<title>THE ANNALS</title>
 	</head>
 	<body>
-		{{ response }}
+		<!-- attack the site for the title of to article to put it into the response dictionary -->
+		{% for key in response_keys %}
+			<a href='{{ response_dict[key] }}'>READ THIS SO INTERESTING</a>
+			<br>
+		{% endfor %}
 	</body>
 </html>
