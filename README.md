@@ -47,8 +47,18 @@ You expected better of Paul. Your eyes show it.
 
 "Hey, listen, I didn't ask for your judgment eyes. I know I'm going to get them anyway. I'm doing this as fast as I can, I've just got...er...some other things. Going on right now." There is a small black soot mark on Paul's arm, above which you can see some dried blood. Come to think of it, Paul does look a little more harrassed than just a Board of Trustees meeting...
 
-"Come back in a few?"  
+"Come back in a few?"
 
+
+***
+
+Carrying a box of eggs home from the corner story, you see there's a light on in the library. On a whim, you turn into the parkinglot and notice that there's a small piece of paper tacked to the outside of the grand double doors.
+
+"Welcome to the Annals!!!!!" it proclaims, abusing its exclamation point privileges like it was in high school. The door creaks open and light pools on the blacktop. Peeking inside, you find Paul sprawled out on the floor, flasks of alcohol uncorked and half finished. There's gibberish scrawled in black ink all over the floor and stacks.
+
+"What the..."
+
+ 
 #Changelog
 =========
 ##- 0.0 -- 8/8/13 -- prelim commit
@@ -57,3 +67,8 @@ You expected better of Paul. Your eyes show it.
 ##- 0.1 -- 2/1/2014 -- twitter to user
 	1. Twitter REST API call from downloaded creds
 	2. Prints to a CSV and calls old tweets from the CSV archive
+
+##- 0.2 -- 4/20/2014 -- bring out the flask
+	1. CSV functionality deprecated
+	2. Web interface functional via Flask.py
+	3. Calls to Twitter and prints out gibberish dictionary of links only
