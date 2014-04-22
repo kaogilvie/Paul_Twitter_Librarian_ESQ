@@ -28,18 +28,27 @@ def get_timeline(app_key, app_secret, username):
 		#get date
 		grab_url = False
 		date = i['created_at']
+		print date
 		for k in i['entities']['urls']:
 			grab_url = k['expanded_url']
 		if grab_url is not False:
-			response_dict[date]['url'] = grab_url
+			response_dict[date] = {'url':grab_url}
 		
-		#get hashtags -- check if not null
-		hashtags = i['hashtags']
-		response_dict[date]['hashtags'] = hashtags
+		#get hashtags
+		hashtags = i['entities']['hashtags']
+		try:
+			response_dict[date]['hashtags'] = hashtags
+		except KeyError:
+			#no grab_url for that date, pass
+			pass
 
-		#get text of tweet -- check if not null
+		#get text of tweet
 		text = i['text']
-		response_dict[date]['text'] = text
+		try:
+			response_dict[date]['text'] = text
+		except KeyError:
+			#no grab_url for that date, pass
+			pass
 
 		#can put these all together in a function, I think
 

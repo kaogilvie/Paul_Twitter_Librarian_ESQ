@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		{% block head %}
 		<meta charset='utf-8' lang='en'>
-		<title>Paul: Twitter Librarian, ESQ</title>
+		<title>{% block metatitle %}Paul: Twitter Librarian, ESQ{% endblock %}</title>
 		<link href='http://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" media="screen" id="default_styles" href="{{ url_for('static', filename='paul.css')}}">
+		{% endblock %}
 	</head>
 	<body>
-		<header id="title">Paul: Twitter Librarian, ESQ</header>
+		{% block body %}
+		<header id="title">{% block title %}Paul: Twitter Librarian, ESQ{% endblock %}</header>
 		<form action='/annals' method='POST'>
 			<div id="username">
 				Twitter Username: <input type='text' name='username'><br>
 			</div>
 			<input id="submit" type="submit" value="submit">
 		</form>
+		{% endblock %}
 	</body>
 	<footer>
+		{% block footer %}
 		<a id="github" href="http://github.com/kgilvi3">KO, 2014.</a><br>
 		<a id="ko" href="http://kyleogilvie.com">See more.</a><br>
 		<a id="tumblr" href="http://thewinningstrategies.com">"Took a sip of something poison but I hold on tight."</a>
+		{% endblock %}
 	</footer>
 </html>

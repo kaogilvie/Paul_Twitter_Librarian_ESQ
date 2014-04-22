@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html>
+{% extends "paul.html" %}
+
 	<head>
-		<meta charset='utf-8' lang='en'>
-		<title>THE ANNALS</title>
+		{% block metatitle %}THE ANNALS{% endblock %}
+
+		{% block head %}
+			{{ super() }}
+		{% endblock %}
 	</head>
 	<body>
-		<!-- attack the site for the title of to article to put it into the response dictionary -->
-		{% for key in response_keys %}
-			<a href='{{ response_dict[key] }}'>READ THIS SO INTERESTING</a>
-			<br>
-		{% endfor %}
+		{% block body %}
+			<!-- attack the site for the title of the article to put it into the response dictionary -->
+			{% for key in response_keys %}
+				<a href="{{ response_dict[key]['url'] }}">{{ response_dict[key]['url'] }}</a>
+				<br>
+			{% endfor %}
+		{% endblock %}
 	</body>
+	<footer></footer>
 </html>
