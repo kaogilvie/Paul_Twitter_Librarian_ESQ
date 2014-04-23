@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 from fortknox import PTLE
 import paul
+import requests
+import lxml.html
+#from lxml import etree
 
 app = Flask(__name__)
 
@@ -17,7 +20,14 @@ def annals():
 	if request.method == 'POST':
 		username = request.form['username']
 		response, keys = paul.get_timeline(app_key, app_secret, username)
-		return render_template('annals.html', response_dict=response, response_keys=keys)
+		titles = []
+		#example of grabbing title
+		for key in keys:
+			r = requests.get(response[key]['url'])
+			tree = lxml.html.fromstring(r.text)
+			title = tree.xpath('/html/head/title/text()')
+			response[key]['title'] = title[0]
+		return render_template('annals.html', response_dict=response, response_keys=keys, titles=titles)
 	else:
 		return 'get request'
 

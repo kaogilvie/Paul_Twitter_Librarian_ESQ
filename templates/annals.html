@@ -11,7 +11,7 @@
 		{% block body %}
 			<!-- attack the site for the title of the article to put it into the response dictionary -->
 			{% for key in response_keys %}
-				<a href="{{ response_dict[key]['url'] }}">{{ response_dict[key]['url'] }}</a>
+				<a href="{{ response_dict[key]['url'] }}">{{ response_dict[key]['title'] }}</a>
 				<br>
 			{% endfor %}
 		{% endblock %}
